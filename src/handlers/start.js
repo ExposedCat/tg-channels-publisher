@@ -1,18 +1,15 @@
-import { getDb, modifyDb } from '../services/database.js'
-import { sendPost } from '../services/send-post.js'
-import { sendNotification } from '../services/send-notification.js'
-
-const random = length => Math.floor(Math.random() * length)
+import { getDb } from '../services/database.js'
 
 async function handleStartCommand(ctx) {
 	const db = await getDb()
-	const itemId = random(db.length)
-	const message = db[itemId]
-	if (message) {
-		await sendPost.bind(ctx)(message)
-		await modifyDb(db => db.splice(itemId, 1))
+	if (db.length) {
+		await ctx.replyWithHTML(
+			`Hey, ${ctx.from.first_name}!\nCats left: <b>${db.length}</b> 😸`
+		)
 	} else {
-		await sendNotification.bind(ctx)(`No cats for sending 😿`)
+		await ctx.replyWithHTML(
+			`${ctx.from.first_name}, there is no cats left! 😿`
+		)
 	}
 }
 
