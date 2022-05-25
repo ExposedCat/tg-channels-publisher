@@ -15,7 +15,7 @@ async function sendPost() {
 		})
 		await modifyDb(db => db.splice(itemId, 1))
 	} else {
-		await sendNotification.bind(ctx)(`No cats for sending 😿`)
+		await sendNotification.bind(this)(`No cats for sending 😿`)
 	}
 }
 
