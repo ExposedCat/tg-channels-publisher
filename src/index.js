@@ -10,6 +10,6 @@ setConfigFile({
 
 const bot = initBot()
 bot.launch()
-// runScheduler(bot)
+runScheduler(bot)
 
 console.info('App started')
